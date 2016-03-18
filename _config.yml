@@ -1,8 +1,8 @@
 # Site settings
 title: Pepelu
-url: "http://tonypepelu.github.io"    # the protocol and hostname of your site, eg. `http://laobubu.github.io`
+url: "https://tonypepelu.github.io"    # the protocol and hostname of your site, eg. `http://laobubu.github.io`
 baseurl: "" # the prefix of your site uri, eg. `/jekyll-theme-EasyBook` or just one slash `/`
-#timezone: Asia/Chongqing
+timezone: Asia/Jiangsu
 description: >
   One or more sentences introducing this blog.
 
@@ -16,8 +16,7 @@ twitter_username: amorypepelu
 
 Comment Service: Disqus
 #  choose one and un-comment the line to active it
-disqus_shortname: 评论
-get one: https://disqus.com/admin/signup/
+disqus_shortname: pepelu # get one: https://disqus.com/admin/signup/
 #duoshuo_shortname: xxx  # get one: http://duoshuo.com/create-site/
 
 permalink: /archivers/:title
