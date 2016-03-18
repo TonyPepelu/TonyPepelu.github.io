@@ -9,14 +9,15 @@ description: >
 # Your information
 email: amorypepelu@gmail.com
 author: Tony
-avatar: "//www.gravatar.com/avatar/your_email_md5?d=mm&s=135"
-profile: One sentence introducing yourself.
-#twitter_username: twitter_username
+avatar: "//i.imgur.com/DDbB8QL.jpg?"
+profile: 我的征途是星辰大海
+twitter_username: amorypepelu
 #github_username:  github_username
 
-# Comment Service (Disqus or 多说)
+Comment Service: Disqus
 #  choose one and un-comment the line to active it
-#disqus_shortname: xxx   # get one: https://disqus.com/admin/signup/
+disqus_shortname: 评论
+get one: https://disqus.com/admin/signup/
 #duoshuo_shortname: xxx  # get one: http://duoshuo.com/create-site/
 
 permalink: /archivers/:title

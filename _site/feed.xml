@@ -6,9 +6,286 @@
 </description>
     <link>http://tonypepelu.github.io/</link>
     <atom:link href="http://tonypepelu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 18 Mar 2016 21:43:01 +0800</pubDate>
-    <lastBuildDate>Fri, 18 Mar 2016 21:43:01 +0800</lastBuildDate>
+    <pubDate>Sat, 19 Mar 2016 00:05:28 +0800</pubDate>
+    <lastBuildDate>Sat, 19 Mar 2016 00:05:28 +0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
+    
+      <item>
+        <title>批处理以当前时间为文件名创建指定格式文件</title>
+        <description>&lt;h2 id=&quot;dos&quot;&gt;Dos查看日期加时间的方法&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;echo %date% %time%
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;output:&lt;/p&gt;
+
+&lt;p&gt;2016/02/25 周四 22:49:36.08&lt;/p&gt;
+
+&lt;p&gt;格式化一下：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;echo %date:~0,4%%date:~5,2%%date:~8,2%%time:~0,2%%time:~3,2%%time:~6,2%
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;output:&lt;/p&gt;
+
+&lt;p&gt;20160225225012&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;新建文件：&lt;/h2&gt;
+
+&lt;p&gt;新建任意文件名.任意文件类型的空文件(精确到秒)：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;echo a 2&amp;gt;FileName.type
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;新建以当前时间为文件名的空txt文件：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;echo a 2&amp;gt;%date:~0,4%%date:~5,2%%date:~8,2%%time:~0,2%%time:~3,2%%time:~6,2%.txt
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;以”_“间隔：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;echo a 2&amp;gt;%date:~0,4%_%date:~5,2%_%date:~8,2%_%time:~0,2%_%time:~3,2%_%time:~6,2%.txt
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;把小时数小于10的单个数字转换为两个数字&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;set    CurrentDate=%date:~0,10%
+set    CurrentYear=%date:~0,4%
+set    CurrentMonth=%date:~5,2%
+set    CurrentDay=%date:~8,2%
+set    CurrentTime=%time%
+set    CurrentHour=%CurrentTime:~0,2%
+if    /i %CurrentHour% LSS 10 (set CurrentHour=0%CurrentTime:~1,1%)
+set    CurrentMinute=%time:~3,2%
+set    CurrentSecond=%CurrentTime:~6,2%
+set    CurrentDateTime=%CurrentYear%_%CurrentMonth%_%CurrentDay%_%CurrentHour%_%CurrentMinute%_%CurrentSecond%
+echo    %CurrentDateTime%
+echo a 2&amp;gt;%CurrentDateTime%.txt
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;powershell&quot;&gt;使用PowerShell&lt;/h2&gt;
+
+&lt;p&gt;获取时间：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Get-Date
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;output：&lt;/p&gt;
+
+&lt;p&gt;2016年2月25日 23:31:57&lt;/p&gt;
+
+&lt;p&gt;输出时间：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; Write-Host &quot;$(Get-Date), hello!&quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;output:&lt;/p&gt;
+
+&lt;p&gt;02/25/2016 23:34:06, hello!&lt;/p&gt;
+
+&lt;p&gt;格式化输出时间：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;yyyy    年
+M    月
+d    日
+h    小时（12小时制）
+H    小时（24小时制）
+m    分钟
+s    秒
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; Get-Date -Format &#39;yyyy_MM_dd_HH_mm_ss&#39;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;output:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;2016_02_25_23_37_56
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;新建文件：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; New-Item FileName  -ItemType f
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;-ItemType ： f(file)表示文件，d(directory)表示目录&lt;/p&gt;
+
+&lt;p&gt;-ItemType可以简写为：Type&lt;/p&gt;
+
+&lt;p&gt;新建以时间命名的文件：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;New-Item -ItemType file &quot;$((Get-Date).ToString(&#39;yyyy_MM_dd_HH_mm&#39;)).txt&quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;指定目录名+文件名，在任意目录创建文件：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;New-Item -ItemType file &quot;./$((Get-Date).ToString(&#39;yyyy_MM_dd_HH_mm&#39;)).txt&quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;新建以时间命名的目录：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;New-Item -ItemType Directory -Path &quot;.\$((Get-Date).ToShortDateString())&quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;目录结构：./yyyy/MM/dd/&lt;/p&gt;
+
+&lt;p&gt;或者：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;New-Item -ItemType Directory -Path &quot;.\$((Get-Date).ToString(&#39;yyyy-MM-dd&#39;))&quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;此时的目录结构：./yyyy-MM-dd/&lt;/p&gt;
+
+&lt;p&gt;​&lt;/p&gt;
+
+&lt;p&gt;END&lt;/p&gt;
+</description>
+        <pubDate>Sat, 19 Mar 2016 00:00:00 +0800</pubDate>
+        <link>http://tonypepelu.github.io/archivers/create-file-named-by-current-date</link>
+        <guid isPermaLink="true">http://tonypepelu.github.io/archivers/create-file-named-by-current-date</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>使用jekyll结合EasyBook搭建个人github主页</title>
+        <description>&lt;p&gt;写这篇主要是总结一下我遇到的坑。&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;安装环境&lt;/h2&gt;
+
+&lt;p&gt;这个没什么好说的，主要就是参考这篇文章：&lt;a href=&quot;http://jekyll-windows.juthilo.com/1-ruby-and-devkit/&quot;&gt;Run Jekyll on Windows&lt;/a&gt; ，把Ruby环境搭建好。&lt;/p&gt;
+
+&lt;p&gt;然后根据官网的指示安装 Jekyll : &lt;a href=&quot;http://jekyllrb.com/docs/quickstart/&quot; title=&quot;Title&quot;&gt;Quick-start guide&lt;/a&gt; 。&lt;/p&gt;
+
+&lt;p&gt;过程中可能会遇到这样：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Error fetching https://ruby.taobao.org/:
+        SSL_connect returned=1 errno=0 state=SSLv3 read server certificate B: ce
+rtificate verify failed (https://rubygems-china.oss-cn-hangzhou.aliyuncs.com/spe
+cs.4.8.gz)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;或者是这样：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ERROR:  While executing gem ... (Gem::RemoteFetcher::FetchError)
+    Errno::ECONNRESET: An existing connection was forcibly closed by the remote
+host. - SSL_connect (https://api.rubygems.org/quick/Marshal.4.8/jekyll-3.1.2.gem
+spec.rz)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;还有这样：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ERROR: Could not find a valid gem &#39;jekyll&#39; (&amp;gt;= 0), here is why:
+https://github.com/juthilo/run-jekyll-on-windows/issues/34
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;的错误，解决办法是依次运行下面的指令：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ gem sources --remove https://rubygems.org/
+$ gem sources -a http://rubygems.org/
+$ gem install jekyll
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;easybook&quot;&gt;使用EasyBook主题&lt;/h2&gt;
+
+&lt;p&gt;参考：&lt;a href=&quot;https://github.com/laobubu/jekyll-theme-EasyBook/wiki/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E6%8C%87%E5%8D%97&quot; title=&quot;Title&quot;&gt;快速上手指南&lt;/a&gt; ，不要下载 Jekyll，直接clone EasyBook的项目就行了。&lt;/p&gt;
+
+&lt;p&gt;再使用jekyll调试的时候，报错：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Configuration file: E:/code/GitHub/Tonypepelu.github.io/_config.yml
+  Dependency Error: Yikes! It looks like you don&#39;t have jekyll-paginate or one
+f its dependencies installed. In order to use Jekyll as currently configured, y
+u&#39;ll need to install this gem. The full error message from Ruby is: &#39;cannot loa
+ such file -- jekyll-paginate&#39; If you run into trouble, you can find helpful re
+ources at http://jekyllrb.com/help/!
+jekyll 3.1.2 | Error:  jekyll-paginate
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;原因：在 &lt;code class=&quot;highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt; 文件中使用到了一些东西并没有安装&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gems:
+ - jekyll-paginate
+ - jekyll-gist
+ - jemoji
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;解决办法：依次安装一下就行了&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gem install jekyll-gist
+gem install jemoji
+gem install jekyll-paginate
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;添加评论&lt;/h2&gt;
+
+&lt;p&gt;EasyBook里面已经集成了多说和&lt;a href=&quot;https://disqus.com/home/explore/&quot; title=&quot;Title&quot;&gt;disqus&lt;/a&gt; 的评论系统，这里采用 disqus的评论系统，到网站去注册一下，把js代码拷贝下来，参考：&lt;a href=&quot;http://beiyuu.com/github-pages/&quot; title=&quot;Title&quot;&gt;使用Github Pages建独立博客&lt;/a&gt; 取得js代码，拷贝到 &lt;code class=&quot;highlighter-rouge&quot;&gt;_includes/comments.html&lt;/code&gt;文件中&lt;code class=&quot;highlighter-rouge&quot;&gt;disqus_thread&lt;/code&gt; 标签下，覆盖原有内容。&lt;/p&gt;
+
+&lt;h2 id=&quot;git&quot;&gt;git提交&lt;/h2&gt;
+
+&lt;p&gt;因为我已经在当前git命令中绑定过一个账号了，所以这个站点只能提交到别的账号中，我采用了fork新账号的git page项目让后提交pull request，让另一个账号merge的办法。参考：&lt;a href=&quot;https://help.github.com/articles/using-pull-requests/&quot; title=&quot;Title&quot;&gt;Using pull requests&lt;/a&gt; 。&lt;/p&gt;
+
+&lt;h2 id=&quot;jekyll&quot;&gt;Jekyll调试&lt;/h2&gt;
+
+&lt;p&gt;依次执行：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ jekyll build
+$ jekyll server
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;头像处理&lt;/h2&gt;
+
+&lt;p&gt;这里采用 &lt;a href=&quot;https://github.com/yaqinking&quot; title=&quot;Title&quot;&gt;小笠原&lt;/a&gt; 的做法，把图片托管到 &lt;a href=&quot;http://imgur.com/&quot;&gt;网站&lt;/a&gt; 上，然后在工程配置文件里添加： &lt;code class=&quot;highlighter-rouge&quot;&gt;avatar: &quot;//i.imgur.com/DDbB8QL.jpg?&quot;&lt;/code&gt;  ，比较搞笑的是上传图片必须翻墙，不然传到一半进度条还能退回来。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;写作&lt;/h2&gt;
+
+&lt;p&gt;文章应该保存在 &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; 文件夹，文件命名格式：&lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-TITLE.TYPE&lt;/code&gt; ，例如：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;2011-12-31-new-years-eve-is-awesome.md&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;2012-01-17-hello-world.md&lt;/code&gt;&lt;/p&gt;
+
+    &lt;p&gt;​&lt;/p&gt;
+
+    &lt;p&gt;这个可以使用批处理来解决，详情见下篇文章。&lt;/p&gt;
+
+    &lt;p&gt;​&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;END&lt;/p&gt;
+</description>
+        <pubDate>Fri, 18 Mar 2016 00:00:00 +0800</pubDate>
+        <link>http://tonypepelu.github.io/archivers/how-to-use-jekyll-with-easybook-to-create-blog</link>
+        <guid isPermaLink="true">http://tonypepelu.github.io/archivers/how-to-use-jekyll-with-easybook-to-create-blog</guid>
+        
+        
+      </item>
     
       <item>
         <title>Welcome to Jekyll and EasyBook</title>
@@ -77,114 +354,6 @@
         <category>jekyll</category>
         
         <category>update</category>
-        
-      </item>
-    
-      <item>
-        <title>Style Test</title>
-        <description>&lt;p&gt;This is just a style test post, filled with LoremIpsue. Feel free to delete the file.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://lorempixel.com/400/200/&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;lorem-ipsum-dolor&quot;&gt;Lorem ipsum dolor&lt;/h1&gt;
-
-&lt;p&gt;Sit amet, consectetur adipiscing elit. Phasellus nisi odio, scelerisque vitae volutpat non, facilisis non erat. In gravida placerat pulvinar. Maecenas ac pretium sem. In consectetur nulla leo, ut maximus nisi volutpat eget. Vestibulum vitae malesuada risus, egestas placerat felis. In sed sollicitudin elit. Sed bibendum porttitor dui.&lt;/p&gt;
-
-&lt;h2 id=&quot;condimentum-mauris-accumsan&quot;&gt;Condimentum mauris Accumsan&lt;/h2&gt;
-
-&lt;p&gt;Eu. Suspendisse scelerisque, orci vel elementum accumsan, sem turpis congue justo, et vulputate lacus orci vel felis. Pellentesque at gravida felis, vitae pretium erat. Pellentesque convallis mi vitae lectus semper, quis pellentesque lectus tristique.&lt;/p&gt;
-
-&lt;h2 id=&quot;duis-a-nibh-in&quot;&gt;Duis a nibh in&lt;/h2&gt;
-
-&lt;p&gt;Consectetur ultrices. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Vivamus placerat, tortor et aliquam porttitor, risus mi dapibus neque, vitae vulputate urna.
-– Lorem&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Apurus vel sapien. Fusce at condimentum nibh.&lt;/p&gt;
-
-&lt;h3 id=&quot;donec-ut-urna&quot;&gt;Donec ut urna&lt;/h3&gt;
-
-&lt;p&gt;A dolor rhoncus posuere vel porttitor tortor. Integer ex lacus, sagittis ac tellus et, laoreet condimentum massa.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://lorempixel.com/400/400/&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Aliquam tempor pharetra lacus, vel bibendum purus dapibus nec. Integer hendrerit massa ut libero euismod, id gravida neque facilisis.&lt;/p&gt;
-
-&lt;h2 id=&quot;nunc-nec&quot;&gt;Nunc nec&lt;/h2&gt;
-
-&lt;p&gt;Karan justo id turpis auctor pharetra. Fusce pretium ornare facilisis. Aliquam eget scelerisque ex, eu volutpat leo. Proin pharetra est felis, sit amet suscipit orci mattis quis.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Etiam bibendum purus tincidunt&lt;/li&gt;
-  &lt;li&gt;As dapibus enim et, porta ligula.&lt;/li&gt;
-  &lt;li&gt;Morbi tempus, mauris sed sodales auctor, nulla erat fringilla purus, vel sodales nulla nunc sit amet purus.&lt;/li&gt;
-  &lt;li&gt;Praesent pellentesque urna et leo eleifend molestie ac ac ex.&lt;/li&gt;
-  &lt;li&gt;Ut eu sagittis metus, et malesuada libero.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam placerat mauris a libero tempus facilisis. Maecenas ut augue lacinia, ornare mi in, lobortis arcu. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis justo elit, blandit vel tincidunt ac, imperdiet ut neque.&lt;/p&gt;
-
-&lt;h1 id=&quot;class-aptent&quot;&gt;Class aptent&lt;/h1&gt;
-
-&lt;p&gt;taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam erat volutpat. Sed at semper sem. Morbi in finibus tellus. Pellentesque nec dapibus risus.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;cp&quot;&gt;#include &amp;lt;iostream&amp;gt;
-&lt;/span&gt; 
-  &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cout&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Hello world!&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;endl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;p&gt;vitae erat non congue. Proin sagittis vitae justo at cursus. Phasellus egestas bibendum urna vel condimentum.&lt;/p&gt;
-
-&lt;h2 id=&quot;fusce-a-ullamcorper-nisl&quot;&gt;Fusce a ullamcorper nisl&lt;/h2&gt;
-
-&lt;p&gt;Pellentesque vehicula faucibus nibh, &lt;strong&gt;a pharetra odio pretium ac.&lt;/strong&gt; Mauris eget gravida orci, vitae tincidunt urna. Integer pharetra ante in porta maximus. Morbi ac arcu lacinia, posuere mauris vitae, lobortis dui. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vitae metus nibh. Cras quis malesuada nisi. Ut porttitor, ipsum vel suscipit posuere, elit purus egestas velit, ac lobortis urna orci nec mi.&lt;/p&gt;
-
-&lt;h2 id=&quot;maecenas-bibendum-nisi&quot;&gt;Maecenas bibendum nisi&lt;/h2&gt;
-
-&lt;p&gt;Aleo facilisis porttitor ac ac metus. &lt;strong&gt;Vivamus faucibus faucibus bibendum.&lt;/strong&gt; Donec efficitur consectetur erat quis porttitor. Ut id euismod nunc. Sed venenatis eleifend suscipit. Donec magna purus, porta eget enim a, ornare porttitor nibh. Cras nisl nibh, viverra vitae magna quis, hendrerit facilisis sem.&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;table&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;test&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;lorem&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Praesent ultrices&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;convallis lorem&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;at sollicitudin enim&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Mauris&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;tristique cursus&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;arcu ac&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;facilisis&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Proin&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;vulputate neque lectus&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;maximus malesuada est rutrum ac. Sed blandit semper faucibus. Nam venenatis consectetur malesuada. Nulla lacus purus, ultrices ac eros porttitor, finibus sodales augue. Suspendisse tincidunt, felis in placerat euismod, libero nulla interdum nisl, commodo efficitur felis dui in libero. Integer lobortis sapien sit amet orci tristique auctor a sit amet neque. Nunc tincidunt iaculis purus eget maximus. Fusce risus justo, rutrum at magna sed, rhoncus lacinia lectus. Vivamus lobortis odio ex, ac vehicula nunc facilisis non. Aliquam fermentum diam massa. Sed cursus, nisi varius laoreet aliquet, tortor urna porta turpis, in dictum urna enim vel leo. Etiam at lacus lorem. Vivamus ornare vitae nisl vel malesuada.&lt;/p&gt;
-
-</description>
-        <pubDate>Thu, 01 Jan 1970 08:00:00 +0800</pubDate>
-        <link>http://tonypepelu.github.io/archivers/test</link>
-        <guid isPermaLink="true">http://tonypepelu.github.io/archivers/test</guid>
-        
-        
-        <category>jekyll</category>
         
       </item>
     

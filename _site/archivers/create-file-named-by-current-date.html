@@ -1,0 +1,297 @@
+
+
+
+  
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>批处理以当前时间为文件名创建指定格式文件 « Pepelu</title>
+  <meta name="description" content="Dos查看日期加时间的方法">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://tonypepelu.github.io/archivers/create-file-named-by-current-date">
+  <link rel="alternate" type="application/rss+xml" title="Pepelu" href="http://tonypepelu.github.io/feed.xml">
+
+
+
+  
+
+    <header class="header">
+  <div class="wrapper">
+    <a class="site-title" href="/">Pepelu</a>
+    <nav class="site-nav">
+      
+        
+      
+        
+        <a class="page-link" href="/about/">About</a>
+        
+      
+        
+        <a class="page-link" href="/category/">Category</a>
+        
+      
+        
+      
+        
+      
+        
+      
+    </nav>
+  </div>
+</header>
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="col-main">
+          <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">批处理以当前时间为文件名创建指定格式文件</h1>
+    <p class="post-meta">Mar 19, 2016</p>
+  </header>
+
+  <article class="post-content">
+    <h2 id="dos">Dos查看日期加时间的方法</h2>
+
+<div class="highlighter-rouge">
+<pre class="highlight"><code>echo %date% %time%
+</code></pre>
+</div>
+
+<p>output:</p>
+
+<p>2016/02/25 周四 22:49:36.08</p>
+
+<p>格式化一下：</p>
+
+<div class="highlighter-rouge">
+<pre class="highlight"><code>echo %date:~0,4%%date:~5,2%%date:~8,2%%time:~0,2%%time:~3,2%%time:~6,2%
+</code></pre>
+</div>
+
+<p>output:</p>
+
+<p>20160225225012</p>
+
+<h2 id="section">新建文件：</h2>
+
+<p>新建任意文件名.任意文件类型的空文件(精确到秒)：</p>
+
+<div class="highlighter-rouge">
+<pre class="highlight"><code>echo a 2&gt;FileName.type
+</code></pre>
+</div>
+
+<p>新建以当前时间为文件名的空txt文件：</p>
+
+<div class="highlighter-rouge">
+<pre class="highlight"><code>echo a 2&gt;%date:~0,4%%date:~5,2%%date:~8,2%%time:~0,2%%time:~3,2%%time:~6,2%.txt
+</code></pre>
+</div>
+
+<p>以”_“间隔：</p>
+
+<div class="highlighter-rouge">
+<pre class="highlight"><code>echo a 2&gt;%date:~0,4%_%date:~5,2%_%date:~8,2%_%time:~0,2%_%time:~3,2%_%time:~6,2%.txt
+</code></pre>
+</div>
+
+<h2 id="section-1">把小时数小于10的单个数字转换为两个数字</h2>
+
+<div class="highlighter-rouge">
+<pre class="highlight"><code>set    CurrentDate=%date:~0,10%
+set    CurrentYear=%date:~0,4%
+set    CurrentMonth=%date:~5,2%
+set    CurrentDay=%date:~8,2%
+set    CurrentTime=%time%
+set    CurrentHour=%CurrentTime:~0,2%
+if    /i %CurrentHour% LSS 10 (set CurrentHour=0%CurrentTime:~1,1%)
+set    CurrentMinute=%time:~3,2%
+set    CurrentSecond=%CurrentTime:~6,2%
+set    CurrentDateTime=%CurrentYear%_%CurrentMonth%_%CurrentDay%_%CurrentHour%_%CurrentMinute%_%CurrentSecond%
+echo    %CurrentDateTime%
+echo a 2&gt;%CurrentDateTime%.txt
+</code></pre>
+</div>
+
+<h2 id="powershell">使用PowerShell</h2>
+
+<p>获取时间：</p>
+
+<div class="highlighter-rouge">
+<pre class="highlight"><code>Get-Date
+</code></pre>
+</div>
+
+<p>output：</p>
+
+<p>2016年2月25日 23:31:57</p>
+
+<p>输出时间：</p>
+
+<div class="highlighter-rouge">
+<pre class="highlight"><code> Write-Host "$(Get-Date), hello!"
+</code></pre>
+</div>
+
+<p>output:</p>
+
+<p>02/25/2016 23:34:06, hello!</p>
+
+<p>格式化输出时间：</p>
+
+<div class="highlighter-rouge">
+<pre class="highlight"><code>yyyy    年
+M    月
+d    日
+h    小时（12小时制）
+H    小时（24小时制）
+m    分钟
+s    秒
+</code></pre>
+</div>
+
+<div class="highlighter-rouge">
+<pre class="highlight"><code> Get-Date -Format 'yyyy_MM_dd_HH_mm_ss'
+</code></pre>
+</div>
+
+<p>output:</p>
+
+<div class="highlighter-rouge">
+<pre class="highlight"><code>2016_02_25_23_37_56
+</code></pre>
+</div>
+
+<p>新建文件：</p>
+
+<div class="highlighter-rouge">
+<pre class="highlight"><code> New-Item FileName  -ItemType f
+</code></pre>
+</div>
+
+<p>-ItemType ： f(file)表示文件，d(directory)表示目录</p>
+
+<p>-ItemType可以简写为：Type</p>
+
+<p>新建以时间命名的文件：</p>
+
+<div class="highlighter-rouge">
+<pre class="highlight"><code>New-Item -ItemType file "$((Get-Date).ToString('yyyy_MM_dd_HH_mm')).txt"
+</code></pre>
+</div>
+
+<p>指定目录名+文件名，在任意目录创建文件：</p>
+
+<div class="highlighter-rouge">
+<pre class="highlight"><code>New-Item -ItemType file "./$((Get-Date).ToString('yyyy_MM_dd_HH_mm')).txt"
+</code></pre>
+</div>
+
+<p>新建以时间命名的目录：</p>
+
+<div class="highlighter-rouge">
+<pre class="highlight"><code>New-Item -ItemType Directory -Path ".\$((Get-Date).ToShortDateString())"
+</code></pre>
+</div>
+
+<p>目录结构：./yyyy/MM/dd/</p>
+
+<p>或者：</p>
+
+<div class="highlighter-rouge">
+<pre class="highlight"><code>New-Item -ItemType Directory -Path ".\$((Get-Date).ToString('yyyy-MM-dd'))"
+</code></pre>
+</div>
+
+<p>此时的目录结构：./yyyy-MM-dd/</p>
+
+<p>​</p>
+
+<p>END</p>
+
+  </article>
+  
+  
+
+<div class="post-comments">
+  <div id="disqus_thread"></div>
+<script>
+/**
+* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+
+s.src = '//httptonypepelugithubio.disqus.com/embed.js';
+
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+</div>
+
+
+
+
+</div>
+
+        </div>
+        <div class="col-second">
+          <div class="col-box col-box-author">
+  <img class="avatar" src="//i.imgur.com/DDbB8QL.jpg?" alt="Tony">
+  <div class="col-box-title name">Tony</div>
+  <p>我的征途是星辰大海</p>
+  <p class="contact">
+    
+    
+    <a href="https://twitter.com/amorypepelu">Twitter</a>
+    
+    
+    <a href="mailto:amorypepelu@gmail.com">Email</a>
+    
+  </p>
+</div>
+
+<div class="col-box">
+  <div class="col-box-title">Newest Posts</div>
+  <ul class="post-list">
+    
+      <li><a class="post-link" href="/archivers/create-file-named-by-current-date">批处理以当前时间为文件名创建指定格式文件</a></li>
+    
+      <li><a class="post-link" href="/archivers/how-to-use-jekyll-with-easybook-to-create-blog">使用jekyll结合EasyBook搭建个人github主页</a></li>
+    
+      <li><a class="post-link" href="/archivers/hello">Welcome to Jekyll and EasyBook</a></li>
+    
+  </ul>
+</div>
+
+<div class="col-box post-toc hide">
+  <div class="col-box-title">TOC</div>
+</div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+<div class="wrapper">
+© 2016 Tony
+</div>
+</footer>
+
+<script src="/js/easybook.js"></script>
+
+  
+
+
