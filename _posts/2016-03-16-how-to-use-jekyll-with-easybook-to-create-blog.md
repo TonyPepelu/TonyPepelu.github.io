@@ -1,9 +1,8 @@
 ---
 layout: post
 title: 使用jekyll结合EasyBook搭建个人github主页
-date:   2016-03-18 09:00:13
+date:   2016-03-16 09:00:13
 categories: Tools
-permalink: /archivers/hello
 ---
 
 
@@ -122,8 +121,7 @@ $ jekyll server
 
 * `2011-12-31-new-years-eve-is-awesome.md` 
 
-* `2012-01-17-hello-world.md` 
-
+* `2012-01-17-hello-world.md`
 
   这个可以使用批处理来解决，详情见下篇文章。
 
