@@ -1,8 +1,12 @@
 ---
 layout: post
 title:  批处理以当前时间为文件名创建指定格式文件
+date:   2016-03-17 09:00:13
+categories: Tools
+permalink: /archivers/hello
 ---
 
+批处理以当前时间为文件名创建指定格式文件
 
 ## Dos查看日期加时间的方法
 

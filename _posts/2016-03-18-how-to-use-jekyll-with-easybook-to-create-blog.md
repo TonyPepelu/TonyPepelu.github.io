@@ -1,6 +1,9 @@
 ---
 layout: post
 title: 使用jekyll结合EasyBook搭建个人github主页
+date:   2016-03-18 09:00:13
+categories: Tools
+permalink: /archivers/hello
 ---
 
 
@@ -121,10 +124,12 @@ $ jekyll server
 
 * `2012-01-17-hello-world.md` 
 
-  ​
 
   这个可以使用批处理来解决，详情见下篇文章。
 
   ​
+## 发布
+
+跳进一个坑里直到半夜才爬出来，[用Jekyll创建博客本地正常，上传到GitHub后不能显示文章列表？](https://segmentfault.com/q/1010000004584816/a-1020000004586702 "Title") ，这个问题是因为：jekyll 3（github目前的jekyll版本）默认对于认定为"未来"的post，是不生成的，设置date后面的日期稍微提前一点，就可以了，比如设置为昨天。
 
 END
