@@ -6,8 +6,8 @@
 </description>
     <link>http://tonypepelu.github.io/</link>
     <atom:link href="http://tonypepelu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 19 Mar 2016 00:05:28 +0800</pubDate>
-    <lastBuildDate>Sat, 19 Mar 2016 00:05:28 +0800</lastBuildDate>
+    <pubDate>Sat, 19 Mar 2016 00:23:54 +0800</pubDate>
+    <lastBuildDate>Sat, 19 Mar 2016 00:23:54 +0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
     
       <item>
@@ -154,10 +154,11 @@ s    秒
 &lt;p&gt;​&lt;/p&gt;
 
 &lt;p&gt;END&lt;/p&gt;
+
 </description>
         <pubDate>Sat, 19 Mar 2016 00:00:00 +0800</pubDate>
-        <link>http://tonypepelu.github.io/archivers/create-file-named-by-current-date</link>
-        <guid isPermaLink="true">http://tonypepelu.github.io/archivers/create-file-named-by-current-date</guid>
+        <link>http://tonypepelu.github.io/archivers/create-file-named-by-current-date-with-shell</link>
+        <guid isPermaLink="true">http://tonypepelu.github.io/archivers/create-file-named-by-current-date-with-shell</guid>
         
         
       </item>

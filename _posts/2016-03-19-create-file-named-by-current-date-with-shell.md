@@ -3,6 +3,8 @@ layout: post
 title: 批处理以当前时间为文件名创建指定格式文件
 ---
 
+
+
 ## Dos查看日期加时间的方法
 
 ``` 
@@ -165,3 +167,4 @@ New-Item -ItemType Directory -Path ".\$((Get-Date).ToString('yyyy-MM-dd'))"
 ​
 
 END
+
