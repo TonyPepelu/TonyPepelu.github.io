@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Another Blog</title>
+    <title>Pepelu</title>
     <description>One or more sentences introducing this blog.
 </description>
-    <link>http://laobubu.github.io/jekyll-theme-EasyBook/</link>
-    <atom:link href="http://laobubu.github.io/jekyll-theme-EasyBook/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 18 Mar 2016 21:19:38 +0800</pubDate>
-    <lastBuildDate>Fri, 18 Mar 2016 21:19:38 +0800</lastBuildDate>
+    <link>http://tonypepelu.github.io/</link>
+    <atom:link href="http://tonypepelu.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Fri, 18 Mar 2016 21:43:01 +0800</pubDate>
+    <lastBuildDate>Fri, 18 Mar 2016 21:43:01 +0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
     
       <item>
@@ -70,8 +70,8 @@
 
 </description>
         <pubDate>Tue, 30 Dec 2014 17:00:13 +0800</pubDate>
-        <link>http://laobubu.github.io/jekyll-theme-EasyBook/archivers/hello</link>
-        <guid isPermaLink="true">http://laobubu.github.io/jekyll-theme-EasyBook/archivers/hello</guid>
+        <link>http://tonypepelu.github.io/archivers/hello</link>
+        <guid isPermaLink="true">http://tonypepelu.github.io/archivers/hello</guid>
         
         
         <category>jekyll</category>
@@ -180,8 +180,8 @@
 
 </description>
         <pubDate>Thu, 01 Jan 1970 08:00:00 +0800</pubDate>
-        <link>http://laobubu.github.io/jekyll-theme-EasyBook/archivers/test</link>
-        <guid isPermaLink="true">http://laobubu.github.io/jekyll-theme-EasyBook/archivers/test</guid>
+        <link>http://tonypepelu.github.io/archivers/test</link>
+        <guid isPermaLink="true">http://tonypepelu.github.io/archivers/test</guid>
         
         
         <category>jekyll</category>
