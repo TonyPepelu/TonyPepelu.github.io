@@ -94,7 +94,7 @@ EasyBook里面已经集成了多说和[disqus](https://disqus.com/home/explore/ 
 
 ## git提交
 
-因为我已经在当前git命令中绑定过一个账号了，所以这个站点只能提交到别的账号中，我采用了fork新账号的git page项目让后提交pull request，让另一个账号merge的办法。参考：[Using pull requests](https://help.github.com/articles/using-pull-requests/ "Title") 。
+因为我已经在当前git命令中绑定过一个账号了，所以这个站点只能提交到别的账号中，我采用了fork新账号的git page项目然后提交pull request，让另一个账号merge的办法。参考：[Using pull requests](https://help.github.com/articles/using-pull-requests/ "Title") 。
 
 
 
@@ -124,7 +124,6 @@ $ jekyll server
 * `2012-01-17-hello-world.md`
 
   这个可以使用批处理来解决，详情见下篇文章。
-
 
 ## 发布
 
