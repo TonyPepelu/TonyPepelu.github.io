@@ -7,4 +7,6 @@ nocomments: true
 ---
 
 
-主站 : [Spike Pepelu](http://amorypepelu.github.io "Title") 
+主站 : [Amory Pepelu](https://amorypepelu.github.io "Title") 
+
+闲言碎语 : [Spike Pepelu](https://SpikePepelu.github.io "Title") 
