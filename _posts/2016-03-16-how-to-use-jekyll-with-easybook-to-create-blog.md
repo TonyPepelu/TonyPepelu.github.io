@@ -4,11 +4,7 @@ title: 使用jekyll结合EasyBook搭建个人github主页
 date:   2016-03-16 09:00:13
 categories: Tools
 ---
-
-
 写这篇主要是总结一下我遇到的坑。
-
-
 
 ## 安装环境
 
@@ -49,8 +45,6 @@ $ gem sources -a http://rubygems.org/
 $ gem install jekyll
 ```
 
-
-
 ## 使用EasyBook主题
 
 参考：[快速上手指南](https://github.com/laobubu/jekyll-theme-EasyBook/wiki/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E6%8C%87%E5%8D%97 "Title") ，不要下载 Jekyll，直接clone EasyBook的项目就行了。
@@ -84,19 +78,13 @@ gem install jemoji
 gem install jekyll-paginate
 ```
 
-
-
 ## 添加评论
 
 EasyBook里面已经集成了多说和[disqus](https://disqus.com/home/explore/ "Title") 的评论系统，这里采用 disqus的评论系统，到网站去注册一下，把js代码拷贝下来，参考：[使用Github Pages建独立博客](http://beiyuu.com/github-pages/ "Title") 取得js代码，拷贝到 `_includes/comments.html`文件中`disqus_thread` 标签下，覆盖原有内容。
 
-
-
 ## git提交
 
 因为我已经在当前git命令中绑定过一个账号了，所以这个站点只能提交到别的账号中，我采用了fork新账号的git page项目然后提交pull request，让另一个账号merge的办法。参考：[Using pull requests](https://help.github.com/articles/using-pull-requests/ "Title") 。
-
-
 
 ## Jekyll调试
 
@@ -107,13 +95,9 @@ $ jekyll build
 $ jekyll server
 ```
 
-
-
 ## 头像处理
 
 这里采用 [小笠原](https://github.com/yaqinking "Title") 的做法，把图片托管到 [网站](http://imgur.com/) 上，然后在工程配置文件里添加： `avatar: "//i.imgur.com/DDbB8QL.jpg?"`  ，比较搞笑的是上传图片必须翻墙，不然传到一半进度条还能退回来。
-
-
 
 ## 写作
 
@@ -123,18 +107,14 @@ $ jekyll server
 
 * `2012-01-17-hello-world.md`
 
-  这个可以使用批处理来解决，详情见下篇文章。
+这个可以使用批处理来解决，详情见下篇文章。
 
 ## 发布
 
 跳进一个坑里直到半夜才爬出来，[用Jekyll创建博客本地正常，上传到GitHub后不能显示文章列表？](https://segmentfault.com/q/1010000004584816/a-1020000004586702 "Title")  这个问题是因为：jekyll 3（github目前的jekyll版本）默认对于认定为"未来"的post，是不生成的，设置date后面的日期稍微提前一点，就可以了，比如设置为昨天。
 
-
-
 ## 文章摘要
 
 文章第一段换行符之前的都是文章摘要。
-
-
 
 END
